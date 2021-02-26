@@ -1,0 +1,32 @@
+{
+  "output_folder": "reports",
+  "page_objects_path": "pages",
+  "globals_path": "./globalHook.js",
+  "src_folders": ["specs"],
+  "webdriver": {
+    "start_process": true,
+    "cli_args": ["--verbose"],
+    "port": 9515
+  },
+  "test_settings": {
+    "default": {
+      "request_timeout_options": {
+        "timeout": 100000
+      },
+      "desiredCapabilities": {
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "browserName": "chrome",
+        "chromeOptions": {
+          "args": ["headless", "no-sandbox", "window-size=1920,1080", "--disable-dev-shm-usage"]
+        }
+      }
+    },
+    "prod": {
+      "globals": {
+        "url": "https://www.bing.com/",
+        "testFlowlogsEnabled": true
+      }
+    }
+  }
+}

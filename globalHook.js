@@ -1,9 +1,4 @@
 module.exports = {
-  'default': { 
-    baseURL : 'https://www.robein.nl/',
-    logsEnabled : true
-  },
-
   // Abord all on test fail
   abortOnAssertionFailure: true,
 
@@ -11,7 +6,13 @@ module.exports = {
   waitForConditionPollInterval: 300,
 
   // Timeout duration
-  waitForConditionTimeout: 5000,
+  waitForConditionTimeout: 10000,
+
+  // assertion timeout
+  retryAssertionTimeout: 10000,
+
+  // perform timeout
+  asyncHookTimeout : 10000,
 
   // this will cause waitFor commands on elements to throw an error if multiple
   // elements are found using the given locate strategy and selector
@@ -19,9 +20,9 @@ module.exports = {
 
   beforeEach: function(browser, done) {
     browser
-      .log('Browser ' + browser.options.desiredCapabilities.browserName + ' started', 'message')
+      .log('Browser ' + browser.options.desiredCapabilities.browserName + ' started')
       .windowMaximize()
-      .url(this.default.baseURL).perform(function() {
+      .perform(function() {
         done();
       });
   },
@@ -29,7 +30,7 @@ module.exports = {
   afterEach: function(browser, done) {
     browser
       .end()
-      .log('Browser ' + browser.options.desiredCapabilities.browserName + ' stoped', 'message').perform(function() {
+      .log('Browser ' + browser.options.desiredCapabilities.browserName + ' stopped').perform(function() {
         done();
       });
   }
